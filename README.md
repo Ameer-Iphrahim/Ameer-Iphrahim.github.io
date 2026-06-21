@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1338,6 +1337,197 @@
         top: 160px;
       }
     }
+      /* Extra 3D depth and motion layers */
+    .example-wrap {
+      perspective: 2400px;
+      transform-style: preserve-3d;
+    }
+
+    .hero-orbit {
+      transform: translateZ(-170px) rotateX(18deg) rotateY(-12deg) scale(1.06);
+      animation: orbitWobble 14s var(--ease-soft) infinite alternate;
+    }
+
+    .hero-orbit .orb-line,
+    .hero-orbit .orb-line-2,
+    .hero-orbit .orb-line-3 {
+      position: absolute;
+      inset: 0;
+      border-radius: 42px;
+      transform-style: preserve-3d;
+      pointer-events: none;
+    }
+
+    .hero-orbit .orb-line::before,
+    .hero-orbit .orb-line-2::before,
+    .hero-orbit .orb-line-3::before {
+      content: "";
+      position: absolute;
+      inset: 14% 8% auto auto;
+      width: 42%;
+      height: 42%;
+      border-radius: 50%;
+      border: 1px solid rgba(160, 168, 255, 0.14);
+      animation: orbitSpin 24s linear infinite;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.2) inset;
+    }
+
+    .hero-orbit .orb-line-2::before {
+      inset: auto auto 16% 10%;
+      width: 26%;
+      height: 26%;
+      animation-duration: 28s;
+      animation-direction: reverse;
+    }
+
+    .hero-orbit .orb-line-3::before {
+      inset: 28% auto auto 16%;
+      width: 58%;
+      height: 58%;
+      animation-duration: 34s;
+      opacity: 0.75;
+    }
+
+    .hero-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      transform-style: preserve-3d;
+    }
+
+    .particle {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(146,154,255,0.65));
+      box-shadow: 0 0 24px rgba(145, 152, 255, 0.42);
+      animation: particleFloat 7s var(--ease-soft) infinite;
+      opacity: 0.9;
+    }
+
+    .particle.p1 { left: 15%; top: 23%; animation-duration: 7.6s; }
+    .particle.p2 { right: 18%; top: 18%; animation-duration: 8.4s; }
+    .particle.p3 { left: 20%; bottom: 16%; animation-duration: 9s; }
+    .particle.p4 { right: 23%; bottom: 18%; animation-duration: 7.9s; }
+
+    .panel {
+      transform: translateZ(140px) rotateX(12deg) rotateY(-14deg);
+      animation: panelFloat 8.4s var(--ease-soft) infinite;
+      transform-style: preserve-3d;
+    }
+
+    .panel-depth {
+      position: absolute;
+      inset: -12px;
+      border-radius: 42px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(146,154,255,0.06));
+      filter: blur(10px);
+      transform: translateZ(-60px);
+      opacity: 0.72;
+    }
+
+    .panel-grid-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 36px;
+      background-image: linear-gradient(rgba(140, 148, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(140, 148, 255, 0.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.2), transparent 65%);
+      opacity: 0.45;
+      pointer-events: none;
+      transform: translateZ(28px);
+    }
+
+    .panel-inner {
+      background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(250,251,255,0.82));
+      transform: translateZ(36px);
+    }
+
+    .floating-action {
+      transform: translateY(-50%) translateZ(92px);
+      animation: floatPulse 5.6s var(--ease-soft) infinite, orbitWobble 11s var(--ease-soft) infinite alternate;
+    }
+
+    .mock-card,
+    .metric,
+    .cat-card,
+    .tool-item,
+    .audience-card,
+    .stat {
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .mock-card {
+      transform: translateZ(20px) rotate(-2deg);
+    }
+
+    .mock-card.alt {
+      transform: translateZ(34px) rotate(5deg);
+    }
+
+    .reveal.in-view .panel,
+    .reveal.in-view .hero-orbit {
+      animation-play-state: running;
+    }
+
+    @keyframes panelFloat {
+      0%, 100% { transform: translateZ(140px) rotateX(12deg) rotateY(-14deg) translateY(0px); }
+      50% { transform: translateZ(160px) rotateX(9deg) rotateY(-11deg) translateY(-7px); }
+    }
+
+    @keyframes particleFloat {
+      0%, 100% { transform: translate3d(0,0,30px) scale(1); opacity: 0.68; }
+      50% { transform: translate3d(0,-14px,65px) scale(1.2); opacity: 1; }
+    }
+
+    @keyframes orbitSpin {
+      from { transform: rotate(0deg) translateZ(0); }
+      to { transform: rotate(360deg) translateZ(0); }
+    }
+
+    @keyframes orbitWobble {
+      0%, 100% { transform: translateZ(-170px) rotateX(18deg) rotateY(-12deg) scale(1.06); }
+      50% { transform: translateZ(-156px) rotateX(16deg) rotateY(-8deg) scale(1.08); }
+    }
+
+    .nav,
+    .section-card,
+    .panel,
+    .cat-card,
+    .tool-item,
+    .audience-card,
+    .stat,
+    .mock-card,
+    .btn,
+    .chip,
+    .social {
+      backdrop-filter: blur(18px);
+    }
+
+    .btn,
+    .chip,
+    .nav-link,
+    .social,
+    .icon-chip,
+    .run-btn,
+    .cat-card,
+    .tool-item,
+    .audience-card,
+    .stat,
+    .metric {
+      transition-timing-function: var(--ease-spring);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1425,8 +1615,20 @@
           </div>
 
           <div class="example-wrap reveal" style="transition-delay: 160ms;">
-            <div class="hero-orbit"></div>
+            <div class="hero-orbit">
+              <div class="orb-line"></div>
+              <div class="orb-line-2"></div>
+              <div class="orb-line-3"></div>
+              <div class="hero-particles">
+                <span class="particle p1"></span>
+                <span class="particle p2"></span>
+                <span class="particle p3"></span>
+                <span class="particle p4"></span>
+              </div>
+            </div>
             <div class="panel floaty" id="tiltPanel">
+              <div class="panel-depth"></div>
+              <div class="panel-grid-overlay"></div>
               <div class="panel-inner">
                 <div class="panel-label"><span class="dot"></span> Live Example</div>
 
