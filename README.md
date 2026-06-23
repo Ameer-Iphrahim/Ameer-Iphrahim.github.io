@@ -461,16 +461,6 @@
                 add(def.name, def.cls, def.css, `${def.keyframeName} 2.3s cubic-bezier(.16,1,.3,1)`);
             });
 
-            // ensure we have at least 110, if not add a few more generic but unique
-            while (animations.length < 110) {
-                const idx = animations.length;
-                add(`Unique Effect ${idx}`, `anim-uniq-${idx}`,
-                    `@keyframes uniqAnim${idx} {
-                        0% { opacity:0; transform:perspective(1600px) translate3d(${(idx*7)%200-100}px, ${(idx*13)%180-90}px, ${-100-(idx%5)*20}px) rotateX(${(idx*3)%60}deg) rotateY(${(idx*5)%70}deg) scale(${0.1+(idx%5)*0.08}); filter:blur(${2+(idx%6)}px); }
-                        100% { opacity:1; transform:perspective(1600px) translate3d(0,0,0) rotateX(0) rotateY(0) scale(1); filter:none; }
-                    }`, `uniqAnim${idx} 2.4s cubic-bezier(.16,1,.3,1)`);
-            }
-
             // --------------------------------------------------------------
             // 2. INJECT CSS & BUILD BUTTONS
             // --------------------------------------------------------------
